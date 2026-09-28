@@ -3,7 +3,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_lenght=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
 
 
     def  save(self, *args, **kwargs):
@@ -34,7 +34,7 @@ class ProductSize(models.Model):
         return F"{self.size.name} ({self.stock} in stock) for {self.product.name}"
 
 
-class Product(models.Model):
+class Products(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     photo = models.ImageField(upload_to='products_photo/main', blank=True, null=True)
     name = models.CharField(max_length=100)
@@ -54,6 +54,6 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, 
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, 
                                 related_name='images')
     image = models.ImageField(upload_to='products/extra/main')

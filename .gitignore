@@ -5,6 +5,7 @@ __pycache__/
 .vscode
 .idea
 .env
+.oldenv
 django.log
 security.log
 
