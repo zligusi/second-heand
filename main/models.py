@@ -47,13 +47,12 @@ class Products(models.Model):
     description = models.TextField(blank=True)
     color = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=20, decimal_places=2)
-    quantity = models.IntegerField()
     date_create = models.DateField(auto_now_add=True)
     date_update = models.DateField(auto_now=True)
 
     class Meta:
         ordering = ('name',)
-        
+
 
     def  save(self, *args, **kwargs):
         if not self.slug:
