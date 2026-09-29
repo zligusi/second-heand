@@ -14,6 +14,7 @@ class ProductSizeInline(admin.TabularInline):
 class ProductsAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'color', 'price']
     list_filter = ['category', 'color']
+    list_editable = ['price',]
     search_fields = ['name', 'color', 'description']
     prepopulated_fields = {'slug':('name',)}
     inlines = [ProductsImageInline, ProductSizeInline]

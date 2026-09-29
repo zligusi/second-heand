@@ -2,8 +2,11 @@ from django.db import models
 from django.utils.text import slugify
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(max_length=50, unique=True)
+
+    class Meta:
+        ordering = ('name',)
 
 
     def  save(self, *args, **kwargs):
@@ -37,7 +40,7 @@ class ProductSize(models.Model):
 class Products(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     photo = models.ImageField(upload_to='products_photo/main', blank=True, null=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                   related_name='products')
     defects = models.CharField(max_length=200)
@@ -47,6 +50,10 @@ class Products(models.Model):
     quantity = models.IntegerField()
     date_create = models.DateField(auto_now_add=True)
     date_update = models.DateField(auto_now=True)
+
+    class Meta:
+        ordering = ('name',)
+        
 
     def  save(self, *args, **kwargs):
         if not self.slug:
