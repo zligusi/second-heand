@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, \
 BaseUserManager
+from django.utils.html import strip_tags
 
 
 class CustomUserManager(BaseUserManager):
@@ -40,3 +41,9 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+    def clean(self):
+        for field in ['phone', 'first_name', 'last_name', 'city', 'address', 'nova_post']:
+             value = getattr(self, field)
+             if value :
+                  setattr(self, field, strip_tags(value))
