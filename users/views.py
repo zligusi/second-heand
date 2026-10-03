@@ -14,3 +14,16 @@ def register(request):
         else:
             form = RegistrationForm()
         return render(request, 'users/register.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user, backend= 'django.contrib.auth.backends.ModelBackend')
+            return redirect('home')
+        else:
+            form = LoginForm()
+        return render(request, 'users/login.html', {'form': form})
+
