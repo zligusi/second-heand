@@ -23,7 +23,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User 
-        fields = ('email', 'first_name', 'lsat_name', 'password1', 'password2')
+        fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
 
 
     def clean_email(self):
@@ -57,7 +57,7 @@ class LoginForm(AuthenticationForm):
             self.user_cache = authenticate(self.request, email=email, password=password)
             if self.user_cache is None:
                 raise forms.ValidationError('Invalid Email or password .')
-            elif not self.user_cache.is_active:
+            elif not self.user_cache .is_active:
                 raise forms.ValidationError('This accoutn is inactive .')
         return self.cleaned_data
 
@@ -69,8 +69,8 @@ class UpdateForm(forms.ModelForm):
                             )
     phone = forms.CharField(required=False,
                             label='Phone',
-                            validators=[RegexValidator(regex=r'^\+380\d{9}$', massage= 'Enter a valid  Ukraiene phone number .')],
-                            widget=forms.TextInput(attrs={'class': 'forms-input', 'plsceholder': '+380970000000'})
+                            validators=[RegexValidator(regex=r'^\+380\d{9}$', message= 'Enter a valid  Ukraiene phone number .')],
+                            widget=forms.TextInput(attrs={'class': 'forms-input', 'placeholder': '+380970000000'})
                             )
     first_name = forms.CharField(required=True,
                                 label='First_name',
@@ -90,13 +90,13 @@ class UpdateForm(forms.ModelForm):
                             )
     nova_post = forms.CharField(required=False,
                                 label='Nova-poshta branch number',
-                                widget=forms.TextInput(attrs={'classs': 'form-input', 'placeholder': 'Branch #1, Kyiv, Pyrohivskyi Shliakh 135 | Branch #1 '})
+                                widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Branch #1, Kyiv, Pyrohivskyi Shliakh 135 | Branch #1 '})
                                 )
 
 
     class Meta:
         model = User 
-        field = ('email', 'phone', 'first_name', 'last_name', 'city', 'address', 'nova_post')
+        fields= ('email', 'phone', 'first_name', 'last_name', 'city', 'address', 'nova_post')
 
 
     def clean_email(self):
@@ -114,4 +114,4 @@ class UpdateForm(forms.ModelForm):
                 if cleaned_data.get(field):
                     cleaned_data[field]= strip_tags(cleaned_data[field])
 
-                return cleaned_data  
+            return cleaned_data  
