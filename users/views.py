@@ -48,7 +48,7 @@ def edit_account_detail(request):
 @login_required
 def update_account_detail(request):
     if request.method == 'POST':
-        form = UpdateForm(instance=request.user)
+        form = UpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
             user.clean()
