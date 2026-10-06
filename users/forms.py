@@ -115,3 +115,26 @@ class UpdateForm(forms.ModelForm):
                     cleaned_data[field]= strip_tags(cleaned_data[field])
 
             return cleaned_data  
+
+
+class PasswordRequestForm(forms.Form):
+    email = forms.EmailField(label='Email',
+                             max_length=254,
+                             widget=forms.EmailInput(attrs={'class': 'forms-input', 'placeholder': 'Enter your email .'}))
+
+
+class PasswordResetConfirmForm(forms.Form):
+    new_password1 = forms.CharField(label='New password',
+                                    widget=forms.PasswordInput(attrs={'class': 'forms-input', 'placeholder': 'Enter your new password .'}))
+    new_password2 = forms.CharField(label='Confirm new password',
+                                    widget=forms.PasswordInput(attrs={'class': 'forms-input', 'placeholder': 'Confirm your new password .'}))
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password1 = cleaned_data.get('new_password1')
+        new_password2 = cleaned_data.get('new_password2')
+
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise forms.ValidationError('The two password fields didn\'t match .')
+        return cleaned_data

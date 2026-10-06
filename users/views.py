@@ -1,8 +1,16 @@
+from django.core.checks import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, LoginForm , UpdateForm 
+from .forms import PasswordRequestForm, RegistrationForm, LoginForm , UpdateForm 
 from .models import CustomUser
+from .tasks import send_welcome_email, send_password_reset_email
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
+import logging
+logger = logging.getLogger(__name__)
+
 
 def register(request):
     if request.method == 'POST':
@@ -10,6 +18,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user, backend= 'django.contrib.auth.backends.ModelBackend')
+            send_welcome_email.delay(user.email, user.first_name)
+            logger.info(f"User registered and logged in: {user.email}")
             return redirect('home')
         else:
             form = RegistrationForm()
@@ -62,3 +72,23 @@ def update_account_detail(request):
 def logout_view(request):
     logout(request)
     return redirect('register')
+
+
+def password_reset_confirm(request):
+    if request.method == 'POST':
+        form = PasswordRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = CustomUser.objects.filter(email=email).first()
+            if user:
+                logger.info(f"password reset {email} for user ID {user.pk}")
+                send_password_reset_email.delay(email, user.pk)
+                messages.success(request, 'Password reset email sent')
+                return render(request, 'users/password_reset_done.html')
+            else:
+                messages.warning(request, 'No user found with this email address')
+        else: 
+            messages.error(request,'Please enter a valid email address')
+    else:
+        form = PasswordRequestForm()
+    return render(request, 'users/password_reset_confirm.html', {'form': form})
