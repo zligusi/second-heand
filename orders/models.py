@@ -1,6 +1,21 @@
 from django.db import models
 from main.models import Product
 
+
+class DeliveryMethod(models.Model):
+    name = models.CharField(max_length=30)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.name)
+
+class PayMethod(models.Model):
+    name = models.CharField(max_length=120)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+            return str(self.name)
+
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -8,8 +23,8 @@ class Order(models.Model):
     phone = models.CharField(max_length=13)
     city = models.CharField(max_length=100)
     address = models.CharField(max_length=250)
-    #delivery_method = models.CharField(max_length=50)
-    #cart_method = models.CharField(max_length=50)
+    delivery_method = models.ForeignKey(DeliveryMethod, on_delete=models.PROTECT )
+    pay_method = models.ForeignKey(PayMethod, on_delete=models.PROTECT)
     buy_date = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
 
