@@ -1,0 +1,8 @@
+{% extends "main/shop.html" %}
+{% block title %}
+{{ product.name }}
+{% endblock title %}
+{% block content %}
+    {{ product }}
+    {{ related_products }}
+{% endblock content %}
