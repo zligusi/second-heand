@@ -1,0 +1,73 @@
+/* ===== style for layout.html ===== */
+
+body {
+    margin-top: 0;
+    padding: 0;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 500px) 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 24px;
+    background-color: #1e1e2e;
+    color: #fff;
+}
+
+.search {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2a2a3c;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.header_right {
+    grid-column: 3;
+    justify-items: end;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+
+}
+
+.user_login {
+    display: flex;
+    gap: 16px;
+}
+
+.basket a,
+.user_login a {
+    color: #fff;
+    text-decoration: none;
+}
+.basket a:hover,
+.user_login a:hover {
+    color: #7fd1ae;
+}
+
+.basket i,
+.user_login i {
+    margin-right: 6px;
+}
+
+
+/* ===== style for home.html ===== */
+
+/* ===== style for product_detail.html ===== */
+
+/* ===== style for about.html ===== */ 
+
+/* ===== style for catalog.html ===== */
