@@ -1,8 +1,15 @@
 {% extends "main/shop.html" %}
+
 {% block title %}
 {{ product.name }}
 {% endblock title %}
+
 {% block content %}
-    {{ product }}
-    {{ related_products }}
+    <div class="product_detail">
+      {{ product }}
+    </div>
+    <div class="related_product">
+        <p>Product you may be intrested in.</p>
+        {{ related_products }}
+    </div>
 {% endblock content %}

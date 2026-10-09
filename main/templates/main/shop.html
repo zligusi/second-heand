@@ -20,10 +20,17 @@
             <input type="text" placeholder="Search...">
         </div>
 
-        <a href=""><li><i class="fa-solid fa-user"></i>login</li></a>
-        <a href=""><li><i class="fa-solid fa-user-plus"></i>Register</li></a>
-        <a href="{% url 'basket' %}"><i class="fa-solid fa-cart-shopping"></i>Basket</a>
+        <div class="basket">
+            <a href="{% url 'basket' %}"><i class="fa-solid fa-cart-shopping"></i>Basket</a>
+        </div>
+
+        <div class="user_login">
+            <a href=""><li><i class="fa-solid fa-user"></i>login</li></a>
+            <a href=""><li><i class="fa-solid fa-user-plus"></i>Register</li></a>
+        </div>
+        
     </header>
+
     <aside>
         <!--LOGO-->
 

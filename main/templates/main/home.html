@@ -4,9 +4,21 @@
 
 {% block content %}
     <div class="teaser">
-        <h3>Welcome to our Second Hand !</h3>
-        <p>Discover quality second-hand fashion for your ultimate style transformation. Shop sustainably and help protect our planet with us.</p>
+        <h1>Welcome to our Second Hand!</h1>
+            <p>
+                Here you will find everything to complete your look, both for
+                <b>everyday life</b> and for <b>special occasions</b> and holidays.
+            </p>
+            <p>
+                We also have something you won't find in every second-hand shop:
+                <b>protective gear and workwear for builders</b> and other
+                professionals, ready for a second life on a new job.
+            </p>
     </div>
-    {{ top_products }}
-    {{ products }}
+    <div class="top">
+        {{ top_products }}
+    </div>
+    <div class="product">
+        {{ products }}
+    </div>
 {% endblock %}
