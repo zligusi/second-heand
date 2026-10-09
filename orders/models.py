@@ -27,6 +27,7 @@ class Order(models.Model):
     pay_method = models.ForeignKey(PayMethod, on_delete=models.PROTECT)
     buy_date = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    contact_me = models.BooleanField(default=False, blank=True)
 
     class Meta:
         ordering = ['-buy_date',]
