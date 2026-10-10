@@ -19,3 +19,5 @@ def product_detail(request, id, slug):
     return render(request, 'main/produc_detail.html', {'product': product,
                                                        'related_products': related_products})
 
+def about(request):
+   return render(request, 'main/about.html' )
