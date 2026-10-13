@@ -22,7 +22,7 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
-                    raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError('Superuser must have is_superuser=True.')
 
 
 class CustomUser(AbstractBaseUser):

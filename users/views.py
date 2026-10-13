@@ -45,7 +45,7 @@ def edit_account_detail(request):
     return render(request, 'users/edit_account_detail.html', {'form': form, 'user': request.user})
 
 
-@login_required
+@login_required # 
 def update_account_detail(request):
     if request.method == 'POST':
         form = UpdateForm(request.POST, instance=request.user)
