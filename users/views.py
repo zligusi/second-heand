@@ -45,18 +45,18 @@ def edit_account_detail(request):
     return render(request, 'users/edit_account_detail.html', {'form': form, 'user': request.user})
 
 
-@login_required # 
+
+@login_required 
 def update_account_detail(request):
     if request.method == 'POST':
         form = UpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
             user.clean()
-            user.save()
-            return redirect('users:account_detail', {'user': user})
-        else: 
-            return render(request, 'users/update_acount.html', {'user': request.user})  
-    return redirect('users:profile', {'user': user})
+            return redirect(request, 'users:account_detail')
+    else:
+        form = UpdateForm(instance=request.user)
+    return render(request, 'users/update_account.html', {'form': form})
 
 
 def logout_view(request):
