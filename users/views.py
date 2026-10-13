@@ -29,25 +29,12 @@ def login_view(request):
 
 
 @login_required
-def profile(request):
-    return render(request, 'users/profile.html', {'user': request.user})
-
-
-@login_required
 def account_detail(request):
-    user = CustomUser.objects.get(id=request.user.id)
-    return render(request, 'users/account_detail.html', {'user': user})
-
-
-@login_required
-def edit_account_detail(request):
-    form = UpdateForm(instance=request.user)
-    return render(request, 'users/edit_account_detail.html', {'form': form, 'user': request.user})
-
+    return render(request, 'users/account_detail.html', {'user': request.user})
 
 
 @login_required 
-def update_account_detail(request):
+def update_account(request):
     if request.method == 'POST':
         form = UpdateForm(request.POST, instance=request.user)
         if form.is_valid():

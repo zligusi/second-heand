@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+    <div class="profile">
+        <p>{{ user.email }}</p><br>
+        <p>{{ user.phone }}</p><br>
+        <p>{{ user.first_name }}</p><br>
+        <p>{{ user.last_name }}</p><br>
+        <a href="{% url 'users:update_account' %}">Update</a>
+        <a href="{% url 'users:logout_view' %}">Logout</a>
+    </div>
+{% endblock content %}
