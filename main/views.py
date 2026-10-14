@@ -14,7 +14,7 @@ def product_detail(request, id, slug):
                                                ).exclude(id=product.id)[:3]
     
     if product.stock >= 0 :
-      raise Http404("i'm not have this product")
+      raise Http404("Sorry, this product is no longer avaliable")
 
     return render(request, 'main/produc_detail.html', {'product': product,
                                                        'related_products': related_products})
